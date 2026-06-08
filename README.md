@@ -35,7 +35,13 @@ The sample assets in `assets/demo/` show a landscape source, the planned portrai
 
 ## Install as a Skill
 
-Clone this repository into your agent's skills directory.
+If your agent system supports installing skills from a Git URL, give it this repository URL:
+
+```text
+https://github.com/partyfly/wowclip.git
+```
+
+You can also clone this repository into your agent's skills directory manually.
 
 For Codex:
 
