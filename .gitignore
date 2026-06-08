@@ -1,0 +1,29 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+node_modules/
+dist/
+*.bak
+
+# Local models and downloaded third-party weights.
+assets/models/
+
+# Local WowClip projects, generated media, caches, and exports.
+wowclip-project/
+wowclip-youtube-project/
+LiveClipper/subtitles/
+transcripts/
+plans/clips/
+plans/portrait/
+cache/frames/
+cache/faces/
+cache/overlays/
+cache/previews/
+exports/
+wowclip-auto-result.json
+source-links.json
+
+# Editor and rsync temporary files.
+.*.swp
+scripts/.*.py.*

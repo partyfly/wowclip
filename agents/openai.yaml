@@ -1,0 +1,3 @@
+display_name: WowClip
+short_description: Local AI clipping, subtitles, and horizontal-to-vertical reframing.
+default_prompt: Analyze this video locally, generate engineered subtitles, create a standard edl.json with portrait placement, validate it, preview frames, and export the final clip.

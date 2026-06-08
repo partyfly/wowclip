@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wowclip.local/schemas/wowclip.highlight-plan.v1.schema.json",
+  "title": "WowClip Highlight Plan v1",
+  "type": "object",
+  "required": ["schema", "sourceAssetId", "highlights", "clipPlans"],
+  "properties": {
+    "schema": { "const": "wowclip.highlight-plan.v1" },
+    "sourceAssetId": { "type": "string", "minLength": 1 },
+    "highlights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "startMs", "endMs", "text", "reason"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "startMs": { "type": "integer", "minimum": 0 },
+          "endMs": { "type": "integer", "minimum": 0 },
+          "text": { "type": "string" },
+          "reason": { "type": "string" },
+          "labels": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "clipPlans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "summary", "reason", "segments"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string" },
+          "summary": { "type": "string" },
+          "reason": { "type": "string" },
+          "highlightIds": { "type": "array", "items": { "type": "string" } },
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["role", "startMs", "endMs", "reason"],
+              "properties": {
+                "highlightId": { "type": "string" },
+                "role": {
+                  "enum": ["hook", "proof", "demo", "benefit", "quote", "body", "cta"]
+                },
+                "startMs": { "type": "integer", "minimum": 0 },
+                "endMs": { "type": "integer", "minimum": 0 },
+                "reason": { "type": "string" },
+                "actions": {
+                  "type": "array",
+                  "items": {
+                    "enum": ["hook_frontload", "trim_breath", "remove_filler", "tighten_pause", "tighten_demo", "keep_context"]
+                  }
+                }
+              }
+            }
+          },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

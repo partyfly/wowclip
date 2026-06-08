@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wowclip.local/schemas/wowclip.portrait-plan.v1.schema.json",
+  "title": "WowClip Portrait Plan v1",
+  "type": "object",
+  "required": ["schema", "assetId", "target", "ranges"],
+  "properties": {
+    "schema": { "const": "wowclip.portrait-plan.v1" },
+    "assetId": { "type": "string", "minLength": 1 },
+    "target": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "aspectRatio": { "type": "string" }
+      }
+    },
+    "ranges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["startMs", "endMs", "cropRect"],
+        "properties": {
+          "startMs": { "type": "integer", "minimum": 0 },
+          "endMs": { "type": "integer", "minimum": 1 },
+          "portraitMode": { "type": "string", "enum": ["speaker_crop", "blurred_background", "dialogue_stack"] },
+          "selectedPersonLabel": { "type": "string" },
+          "reason": { "type": "string" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "cropRect": {
+            "type": "object",
+            "required": ["x", "y", "width", "height"],
+            "properties": {
+              "x": { "type": "number", "minimum": 0, "maximum": 1 },
+              "y": { "type": "number", "minimum": 0, "maximum": 1 },
+              "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+              "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+            }
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string" },
+              "direction": { "type": "string" },
+              "panels": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "personLabel": { "type": "string" },
+                    "cropRect": { "type": "object" },
+                    "targetRect": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
