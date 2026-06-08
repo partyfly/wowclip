@@ -33,8 +33,6 @@ The sample assets in `assets/demo/` show a landscape source, the planned portrai
 
 ![Portrait crop frame strip](assets/demo/yu-hua-portrait-crop-strip.png)
 
-The final MP4 should be attached through GitHub's Markdown file uploader so the README can render it as an inline video preview.
-
 ## Install as a Skill
 
 Clone this repository into your agent's skills directory.
