@@ -8,6 +8,7 @@ dist/
 
 # Local models and downloaded third-party weights.
 assets/models/
+assets/demo/*.mp4
 
 # Local WowClip projects, generated media, caches, and exports.
 wowclip-project/

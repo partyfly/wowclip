@@ -21,6 +21,20 @@ It is designed to be installed into Codex, OpenClaw, Claude Code, or another `SK
 - Not a GUI timeline editor.
 - Not a model-weight bundle.
 
+## Demo
+
+The sample assets in `assets/demo/` show a landscape source, the planned portrait crop, and the final exported clip.
+
+**Source video frames**
+
+![Landscape source frame strip](assets/demo/yu-hua-source-strip.png)
+
+**9:16 portrait crop result**
+
+![Portrait crop frame strip](assets/demo/yu-hua-portrait-crop-strip.png)
+
+The final MP4 should be attached through GitHub's Markdown file uploader so the README can render it as an inline video preview.
+
 ## Install as a Skill
 
 Clone this repository into your agent's skills directory.
@@ -69,6 +83,7 @@ The editable source of truth is `edl.json`, not an ad hoc FFmpeg command.
 .
 ├── SKILL.md                         # Agent workflow contract
 ├── agents/openai.yaml               # Optional agent metadata
+├── assets/demo/                     # README-visible sample frames and final clip
 ├── assets/editor/EDITOR_CONTRACT.md # Optional editor integration contract
 ├── references/                      # Pipeline design notes
 ├── schemas/                         # Timeline, highlight, and portrait JSON schemas
@@ -160,6 +175,10 @@ python3 -m unittest discover -s tests
 ## Privacy
 
 WowClip is designed so runtime media processing can happen locally. The project scripts should not upload source media, audio, transcripts, face detections, or timelines. You are still responsible for reviewing any third-party tools or models you install separately.
+
+## Contact
+
+Follow WowClip at [x.com/waoclip](https://x.com/waoclip).
 
 ## Third-Party Tools and Models
 

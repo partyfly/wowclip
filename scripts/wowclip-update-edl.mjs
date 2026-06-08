@@ -10,7 +10,7 @@ function runTransform(script, edl) {
 
 function normalizeEDL(edl, nextVersion) {
   const normalized = JSON.parse(JSON.stringify(edl));
-  normalized.kind = "wowclip.timeline.v1";
+  normalized.kind = "cutpilot.timeline.v1";
   normalized.schemaVersion = Math.max(2, Number(normalized.schemaVersion || 2));
   normalized.version = nextVersion;
   normalized.timeline ||= {};
@@ -34,7 +34,7 @@ try {
   if (!script) throw new Error("script is required");
   if (!Number.isInteger(input.baseVersion)) throw new Error("baseVersion is required");
   const current = await readJsonFile(edlPath);
-  if (current.kind !== "wowclip.timeline.v1") throw new Error("edl must be wowclip.timeline.v1");
+  if (current.kind !== "cutpilot.timeline.v1") throw new Error("edl must be cutpilot.timeline.v1");
   if (Number(current.version || 0) !== input.baseVersion) {
     throw new Error(`EDL_VERSION_CONFLICT: expected ${current.version || 0}, got ${input.baseVersion}`);
   }

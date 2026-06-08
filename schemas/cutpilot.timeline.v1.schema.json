@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutpilot.local/schemas/cutpilot.timeline.v1.schema.json",
+  "title": "CutPilot Timeline v1 EDL",
+  "type": "object",
+  "required": ["kind", "schemaVersion", "version", "project", "projectId", "assets", "timebase", "timeline"],
+  "properties": {
+    "kind": { "const": "cutpilot.timeline.v1" },
+    "schemaVersion": { "type": "integer", "minimum": 2 },
+    "version": { "type": "integer", "minimum": 0 },
+    "project": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "required": ["id", "name"],
+          "properties": {
+            "id": { "type": "string", "minLength": 1 },
+            "name": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "projectId": { "type": "string" },
+    "assets": { "type": "object" },
+    "timebase": {
+      "type": "object",
+      "required": ["fps", "ticksPerSecond"],
+      "properties": {
+        "fps": { "type": "integer", "minimum": 1 },
+        "ticksPerSecond": { "type": "integer", "minimum": 1 },
+        "tcStartTicks": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "required": ["durationTicks", "playheadTicks", "tracks"],
+      "properties": {
+        "durationTicks": { "type": "integer", "minimum": 0 },
+        "playheadTicks": { "type": "integer", "minimum": 0 },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "label", "clips"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "type": { "enum": ["video", "audio", "subtitle", "effect", "html"] },
+              "role": { "type": "string" },
+              "label": { "type": "string" },
+              "style": { "type": "object" },
+              "clips": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "kind", "dstStart", "dstEnd"],
+                  "properties": {
+                    "id": { "type": "string", "minLength": 1 },
+                    "kind": { "type": "string", "minLength": 1 },
+                    "assetId": { "type": "string" },
+                    "srcIn": { "type": "integer", "minimum": 0 },
+                    "srcOut": { "type": "integer", "minimum": 0 },
+                    "dstStart": { "type": "integer", "minimum": 0 },
+                    "dstEnd": { "type": "integer", "minimum": 0 },
+                    "text": { "type": "string" },
+                    "placement": { "type": "object" },
+                    "params": { "type": "object" },
+                    "styleOverride": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "analysis": { "type": "object" },
+    "artifacts": { "type": "object" },
+    "ui": { "type": "object" }
+  }
+}

@@ -9,8 +9,8 @@ try {
   const timelineErrors = timeline ? validateTimeline(timeline) : [];
   const portraitPlanErrors = portraitPlan ? validatePortraitPlan(portraitPlan) : [];
   if (!timeline && !portraitPlan) throw new Error("edl/edlPath, timeline/timelinePath, or portraitPlan/portraitPlanPath is required");
-  const isWowClipEDL = timeline?.kind === "wowclip.timeline.v1";
-  const tracks = isWowClipEDL ? timeline?.timeline?.tracks : timeline?.tracks;
+  const isCutPilotEDL = timeline?.kind === "cutpilot.timeline.v1";
+  const tracks = isCutPilotEDL ? timeline?.timeline?.tracks : timeline?.tracks;
   const errors = [...timelineErrors, ...portraitPlanErrors];
   writeJson({
     ok: errors.length === 0,
@@ -18,7 +18,7 @@ try {
     timeline: timeline ? {
       kind: timeline.kind || timeline.schema,
       version: timeline.version,
-      durationTicks: isWowClipEDL ? timeline.timeline?.durationTicks : timeline.durationTicks,
+      durationTicks: isCutPilotEDL ? timeline.timeline?.durationTicks : timeline.durationTicks,
       assetCount: timeline.assets ? Object.keys(timeline.assets).length : 0,
       trackCount: Array.isArray(tracks) ? tracks.length : 0,
     } : null,

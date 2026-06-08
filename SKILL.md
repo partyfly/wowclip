@@ -13,7 +13,7 @@ WowClip is an offline-first video clipping workflow. It uses local open-source m
 
 - Do not call cloud APIs.
 - Do not overwrite source media.
-- `edl.json` is the canonical editable timeline. Use `wowclip.timeline.v1`.
+- `edl.json` is the canonical editable timeline. Use `cutpilot.timeline.v1` unless a legacy caller explicitly asks for `wowclip.timeline.v1`.
 - Agent editing must target `edl.json`, highlight plans, subtitle assets, or portrait plans. Do not create one-off FFmpeg scripts as the source of truth.
 - Do not edit `edl.json` directly. Use `wowclip-update-edl.mjs` for EDL mutations so version checks and validation run.
 - Keep all generated files inside the project directory.
