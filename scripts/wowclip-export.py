@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export a local MP4 from a standard CutPilot EDL."""
+"""Export a local MP4 from a standard WowClip EDL."""
 
 from __future__ import annotations
 
@@ -438,8 +438,8 @@ def main() -> int:
     try:
         payload = read_input()
         edl, edl_path = load_edl(payload)
-        if edl.get("kind") != "cutpilot.timeline.v1":
-            raise ValueError("wowclip-export.py only supports cutpilot.timeline.v1 edl.json")
+        if edl.get("kind") != "wowclip.timeline.v1":
+            raise ValueError("wowclip-export.py only supports wowclip.timeline.v1 edl.json")
         assets = edl.get("assets") or {}
         canvas = canvas_from_edl(edl)
         video_clips = [clip for clip in track_clips(edl, "video") if clip.get("kind") != "subtitle"]

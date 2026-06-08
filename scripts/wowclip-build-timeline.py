@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a standard CutPilot EDL from a clip plan, subtitles, and portrait plan."""
+"""Build a standard WowClip EDL from a clip plan, subtitles, and portrait plan."""
 
 from __future__ import annotations
 
@@ -238,7 +238,7 @@ def main() -> int:
     project_id = str(payload.get("projectId") or project_root.name or "wowclip-project")
     project_name = str(payload.get("projectName") or project_id)
     edl = {
-        "kind": "cutpilot.timeline.v1",
+        "kind": "wowclip.timeline.v1",
         "schemaVersion": 2,
         "version": 0,
         "project": {"id": project_id, "name": project_name},

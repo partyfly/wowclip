@@ -77,30 +77,30 @@ export function validateTimeline(timeline) {
   if (!timeline || typeof timeline !== "object" || Array.isArray(timeline)) {
     return [{ code: "TIMELINE_NOT_OBJECT", message: "timeline must be an object", path: "" }];
   }
-  const isCutPilotEDL = timeline.kind === "cutpilot.timeline.v1";
+  const isWowClipEDL = timeline.kind === "wowclip.timeline.v1";
   const isLegacyWowClipTimeline = timeline.schema === "wowclip.timeline.v1";
-  if (!isCutPilotEDL && !isLegacyWowClipTimeline) {
-    add("INVALID_SCHEMA", "timeline must be cutpilot.timeline.v1 edl.json or legacy wowclip.timeline.v1", "/kind");
+  if (!isWowClipEDL && !isLegacyWowClipTimeline) {
+    add("INVALID_SCHEMA", "timeline must be wowclip.timeline.v1 edl.json", "/kind");
   }
-  if (isCutPilotEDL && (!Number.isInteger(timeline.schemaVersion) || timeline.schemaVersion < 2)) {
+  if (isWowClipEDL && (!Number.isInteger(timeline.schemaVersion) || timeline.schemaVersion < 2)) {
     add("INVALID_SCHEMA_VERSION", "schemaVersion must be integer >= 2", "/schemaVersion");
   }
   if (!Number.isInteger(timeline.version) || timeline.version < 0) add("INVALID_VERSION", "version must be a non-negative integer", "/version");
   const ticksPerSecond = Number(timeline.timebase?.ticksPerSecond || 0);
   if (!Number.isInteger(ticksPerSecond) || ticksPerSecond <= 0) add("INVALID_TIMEBASE", "timebase.ticksPerSecond must be positive", "/timebase/ticksPerSecond");
   if (!(Number(timeline.timebase?.fps || 0) > 0)) add("INVALID_FPS", "timebase.fps must be positive", "/timebase/fps");
-  const canvas = isCutPilotEDL ? timeline.ui?.canvas : timeline.canvas;
-  if (!(Number(canvas?.width || 0) > 0)) add("INVALID_CANVAS_WIDTH", "canvas.width must be positive", isCutPilotEDL ? "/ui/canvas/width" : "/canvas/width");
-  if (!(Number(canvas?.height || 0) > 0)) add("INVALID_CANVAS_HEIGHT", "canvas.height must be positive", isCutPilotEDL ? "/ui/canvas/height" : "/canvas/height");
+  const canvas = isWowClipEDL ? timeline.ui?.canvas : timeline.canvas;
+  if (!(Number(canvas?.width || 0) > 0)) add("INVALID_CANVAS_WIDTH", "canvas.width must be positive", isWowClipEDL ? "/ui/canvas/width" : "/canvas/width");
+  if (!(Number(canvas?.height || 0) > 0)) add("INVALID_CANVAS_HEIGHT", "canvas.height must be positive", isWowClipEDL ? "/ui/canvas/height" : "/canvas/height");
   const assets = timeline.assets && typeof timeline.assets === "object" && !Array.isArray(timeline.assets) ? timeline.assets : null;
   if (!assets) add("INVALID_ASSETS", "assets must be an object", "/assets");
-  const tracksPath = isCutPilotEDL ? "/timeline/tracks" : "/tracks";
-  const durationPath = isCutPilotEDL ? "/timeline/durationTicks" : "/durationTicks";
-  const tracks = Array.isArray(isCutPilotEDL ? timeline.timeline?.tracks : timeline.tracks)
-    ? (isCutPilotEDL ? timeline.timeline.tracks : timeline.tracks)
+  const tracksPath = isWowClipEDL ? "/timeline/tracks" : "/tracks";
+  const durationPath = isWowClipEDL ? "/timeline/durationTicks" : "/durationTicks";
+  const tracks = Array.isArray(isWowClipEDL ? timeline.timeline?.tracks : timeline.tracks)
+    ? (isWowClipEDL ? timeline.timeline.tracks : timeline.tracks)
     : null;
   if (!tracks) add("INVALID_TRACKS", "tracks must be an array", tracksPath);
-  const durationTicks = Number(isCutPilotEDL ? timeline.timeline?.durationTicks || 0 : timeline.durationTicks || 0);
+  const durationTicks = Number(isWowClipEDL ? timeline.timeline?.durationTicks || 0 : timeline.durationTicks || 0);
   if (!Number.isInteger(durationTicks) || durationTicks < 0) add("INVALID_DURATION", "durationTicks must be non-negative", durationPath);
 
   if (tracks) {

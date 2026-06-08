@@ -1,14 +1,14 @@
 # Standard EDL
 
-WowClip uses `edl.json` as the canonical editable timeline. The preferred schema is `cutpilot.timeline.v1`, matching the iOS `EDLDocument` model.
+WowClip uses `edl.json` as the canonical editable timeline. The preferred schema is `wowclip.timeline.v1`.
 
-Legacy `wowclip.timeline.v1` files may still be read for compatibility, but new projects should write `edl.json`.
+New projects should write `edl.json`.
 
 ## Minimal EDL
 
 ```json
 {
-  "kind": "cutpilot.timeline.v1",
+  "kind": "wowclip.timeline.v1",
   "schemaVersion": 2,
   "version": 0,
   "project": { "id": "project-id", "name": "Project Name" },

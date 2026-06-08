@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://cutpilot.local/schemas/cutpilot.timeline.v1.schema.json",
-  "title": "CutPilot Timeline v1 EDL",
+  "$id": "https://wowclip.local/schemas/wowclip.edl.v1.schema.json",
+  "title": "WowClip EDL v1",
   "type": "object",
   "required": ["kind", "schemaVersion", "version", "project", "projectId", "assets", "timebase", "timeline"],
   "properties": {
-    "kind": { "const": "cutpilot.timeline.v1" },
+    "kind": { "const": "wowclip.timeline.v1" },
     "schemaVersion": { "type": "integer", "minimum": 2 },
     "version": { "type": "integer", "minimum": 0 },
     "project": {
